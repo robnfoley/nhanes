@@ -1,314 +1,40 @@
-<script src='https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js'></script>
-<script src='https://code.highcharts.com/highcharts.js'></script>
-<script src='https://code.highcharts.com/modules/data.js'></script>
-<script src='https://code.highcharts.com/modules/exporting.js'></script>
-<script src='https://code.highcharts.com/modules/export-data.js'></script>
-<script src='https://code.highcharts.com/modules/accessibility.js'></script>
-<script src = 'https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js'> </script>
-<script src = 'https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js'> </script>
-<script src = 'https://cdn.datatables.net/buttons/1.6.1/js/buttons.flash.min.js'> </script>
-<script src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js'> </script>
-<script src = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js'> </script>
-<script src = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js'> </script>
-<script src = 'https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js'> </script>
-<script src = 'https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js'> </script>
-<link rel='stylesheet' type='text/css' href = 'https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css'>
-<link rel='stylesheet' type='text/css' href = 'https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css'>
-<script defer src='https://use.fontawesome.com/releases/v5.0.9/js/all.js' integrity='sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl' crossorigin='anonymous'></script>
-<link href='https://fonts.googleapis.com/css?family=Martel Sans' rel='stylesheet'>
-
-<style>
-	body {
-		font-family: 'Martel Sans';
-		width:1000px;
-	}
-
-	.usrdsButtonByRob {
-		padding: 2px;
-        border-color:black;
-        background:#A9A9A9; /*#0099ff;*/
-        color:white;
-        border-radius:5px;
-     }
-      
-	select {
-  		-moz-appearance: none;
-  		-webkit-appearance: none;
-	}
-	select::-ms-expand {
-  		display: none;
-	}	
-</style>
-
-
-
-<script>
-	function usrdsF(
-		figureId,
-		csvData,
-		chartType,
-		chartTitle,
-		yAxisTitle,
-		chartTitleAlignment,	
-		chartHeight,
-		chartWidth,
-		xAxisTitle,
-		resultsMin,
-		resultsMax,
-		resultsDecimalPlaces,
-		subtitleText,
-		subtitleAlignment,
-		stackingType
-	) {	
-		var urL = "https://raw.githubusercontent.com/robnfoley/nhanes/master/" +csvData+   ".csv";	
-		Highcharts.setOptions({
-    		lang: {
-        	thousandsSep: ','
-    		}
-		});
-	
-		Highcharts.chart(figureId, {
-    		chart: {
-        		type: chartType,
-        		height: chartHeight,
-				width:chartWidth
-    		},
-			title: {
-				text:chartTitle,
-				align: chartTitleAlignment
-			},
-			xAxis: {
-				crosshair: true,
-				tickWidth: 1,
-				tickLength: 7,
-				title:		
-					{
-						text:xAxisTitle
-					}
-			},
-			yAxis: {
-				min:resultsMin,
-				max:resultsMax,
-				title: 
-					{
-					text: yAxisTitle
-					},
-				labels: {
-					format: '{value:,.' + resultsDecimalPlaces + 'f}'
-				},
-				lineWidth: 1,
-				tickWidth: 2,
-				tickLength: 7,
-				gridLineColor: 'transparent'
-			},
-			legend: {
-				enabled: true,
-				align: 'right',
-				itemStyle:
-					{
-						color: '#808080',
-						fontSize: 10,
-						fontWeight: 'normal'
-					},
-				verticalAlign: 'middle',
-				layout: 'vertical',
-				borderWidth: 0,
-				borderRadius: 5,
-				borderColor: '#CDCDCD',
-				backgroundColor: '#FAFAFA'
-			},
-    		subtitle: {
-        		text: subtitleText,
-				align: subtitleAlignment
-    		},
-			tooltip: {
-				backgroundColor: 'white',
-				borderWidth: 1,
-				borderColor:'#7cb5ec',
-				borderRadius: 10,
-				crosshairs: true,
-				headerFormat: '{point.key} ',
-				pointFormat: ' | <span style="color:{series.color}">{series.name}:</span> {point.y}',
-				positioner: function () {return { x: 300, y:30};},
-				shadow: false,
-				split: false
-			}, 
-			credits: {
-				text: '<i>USRDS Annual Data Report, 2020</i>',
-				position: {
-					align:'right',x: -5,y: -3
-				}
-			},
-			colors: ['#434348', '#7cb5ec',  '#f7a35c','#f15c80', '#90ed7d', '#8085e9',  '#e4d354', '#2b908f'] ,
-			plotOptions: {
-				series: {
-					marker: {
-						enabled: false
-					},
-					label: {
-						style: {
-							color: 'transparent'
-						}
-					},
-					stacking: stackingType
-				}
-			},
-    		data: {
-        		csvURL: urL
-    		}
-		});
-	}//end of function 
-	
-
-</script>
-
-
-
-
-
-
-
-
-<!--<select class='figure_1_1_media_choice usrdsButtonByRob' >
-	<option value='figure_1_1_media0'>All</option>
-	<option value='figure_1_1_media1'>Age &lt; 65 Yrs.</option>
-	<option value='figure_1_1_media2'>Age >= 65 Yrs.</option>
-	<option value='figure_1_1_media3'>Male</option>
-	<option value='figure_1_1_media4'>Female</option>
-	<option value='figure_1_1_media5'>White</option>
-	<option value='figure_1_1_media6'>African American</option>
-	<option value='figure_1_1_media7'>Hispanic/Latino</option>
-	<option value='figure_1_1_media8'>Data</option>
-	<option value='figure_1_1_media9'>Methods</option>
-</select>-->	
-	
-	
-
-	
-<script>
-	/*var figureDetails = 'figure_1_1';
-	var chartType = 'column';
-	var groupNames = ['All', 'Age <65', 'Age >=65','Male','Female','White','African American/Black','Hispanic/Latino'];
-	var titlePrefix = 'CKD Stages in US Adults: ';
-	var resultsDescription = 'Percent';
-	var dataTableColumnNames = ['Group','Stage','2003-2006','2007-10','2011-14','2015-2018'];
-	var figureMethods = "<h1>Methods</h1><h2>Study Population</h2><p>The study population consisted of adults aged 20 or more with serum creatinine and urinary albumin and creatinine measurements.</p><h2>Study Variables</h2><p>Age ('RIDAGEYR'), sex ('RIAGENDR') and race-ethnicity ('RIDRETH1', mapped as 3~Non-Hispanic White; 4~Non-Hispanic African American/Black; 1 or 2~Hispanic Latino; 5~Other) were obtained from the following files: DEMO_C, DEMO_D, DEMO_E, DEMO_F, DEMO_G, DEMO_H, DEMO_I and DEMO_J. Urinary creatinine ('URXUCR', meausured by the creatininase enzymatic method) were obtained from the following files: L16_C, ALB_CR_D, ALB_CR_E, ALB_CR_F, ALB_CR_G, ALB_CR_H, ALB_CR_I and ALB_CR_J. The CKD-EPI forumula (<i>Ann Intern Med</i>;150:604-1, 2009) was used to estimated glomerular filtration rates.</p><h2>Analysis</h2><p>R version 3.6.2  (December 12, 2019-<i>Dark and Stormy Night</i>) was used for data analysis. The 'NHANES' package was used to produce national-level cross-sectional prevalance estimates, with 'WTMEC2YR/2', 'SDMVPSU' and 'SDMVSTRA', respectively as survey weight, primary sampling unit and stratum variables.";
-	var figureText = "<p>Figure 1.1 shows trends in the prevalence of different stages of chronic kidney disease among US adults between 2003-2006 and 2015-2018. For Stage 3, the prevalence was 6.8% in 2003-2006, 5.8% in 2007-106.6% in 2011-14 and 6.1% in 2015-2018. Corresponding values for Stage 4 and 5 were 0.5%, 0.5%, 0.4%, 0.4% and 0.1%, 0.1%, 0.2%, 0.1, respectively. Comparing first and last eras (as shown in the Data section), statistically significant change was observed for Stage 3 in the subgroup with age &ge; 65 Yrs., where the prevalence decreased from 31.4% (95% confidence interval [CI] 29.3,33.5) to 23.7% (95%CI 21.0,26.5) and Stage 1 in the non-Hispanic White subgroup, where the prevalence increased from 2.8% (95%CI 2.3,3.2) to 4.0% (95%CI 3.3,4.7).</p>";
-	var chartWidth = 800;
-	var chartHeight = 500;*/
-	
-	function figureF(formalTitle,formalFigureNumber,figureNumber,chartType,groupNames,titlePrefix, resultsDescription, dataTableColumnNames,figureMethods,figureText,chartWidth,chartHeight) {
-	//var formalFigureNumber = 'Figure 1.1.1';
-	
-		var figureName = '';
-	var figureName = figureNumber + '_';
-	document.write("<h2>" +formalTitle +"&nbsp;<span style='font-size:20px;color:#C8C8C8'>" + formalFigureNumber + "</span></h2>");
-	document.write("<select class='"+figureName+"media_choice usrdsButtonByRob' >");
-	for (i=0;i<=(groupNames.length - 1);i++){
-		document.write("<option value='" +figureName +"media" +i+ "'>" +groupNames[i]+ "</option>");
-	}
-	document.write("<option value='" + figureName + "media" +groupNames.length+ "'>Data</option>");
-	document.write("<option value='" + figureName + "media" +(groupNames.length + 1) + "'>Methods</option>");
-	document.write('</select><br><br>');
-
-	
-	
-
-	for (i=0;i<=(groupNames.length - 1);i++){
-		document.write("<div class = '"+figureName+"media "+figureName+"media"+i+"' id='container_" +figureName +i+ "'></div>");		
-		usrdsF('container_' + figureName + i,figureName + i,chartType,titlePrefix  +groupNames[i],resultsDescription,
-			   'left', chartHeight,chartWidth,' ',0,null,0,' ','left',null);
-	}
-	
-	document.write("<div class = '" +figureName+ "media " +figureName + "media" + groupNames.length +"' style='width:"+chartWidth+"px;height:400px'><br><table id='" +figureName+ "dataTable' class='display' style='font-size:10px'><thead><tr>");
-	for (i=0;i<=(dataTableColumnNames.length - 1);i++){
-		document.write("<th>"+dataTableColumnNames[i]+"</th>");
-	}
-	
-	document.write("</tr></thead></table><scr" +"ipt>$(document).ready(function() {$('#"+figureName+"dataTable').DataTable({'order': [],dom: 'Bfrtip',buttons: ['csv', 'excel', 'pdf', 'print'],'columnDefs': [{'className': 'dt-center', 'targets': '_all'}],'ajax':'https://raw.githubusercontent.com/robnfoley/nhanes/master/figure_1_1_1_json.txt'});});</scr"+ "ipt></div>");	
-
-	document.write("<div style='width:"+chartWidth+"px;height:"+chartHeight+"px;font-size:12px' class = '" + figureName +"media " + figureName +"media" + (groupNames.length +1)+"'>" + figureMethods + "</div>");		
-	document.write("<scr"+"ipt>$(document).ready(function(){$('."+figureName+"media').eq(0).show();$('."+figureName+"media').not(':eq(0)').hide();$('."+figureName+
-				   "media_choice').on('click', function() {var val = $(this).val();var "+figureName+"media = $('."+figureName+"media');"+figureName+"media.hide();$('.' + val).show();})});</scr"+"ipt>");	
-	document.write("<div style = 'position: relative;margin-top:140px'>" +figureText+ "</div>");
-		
-}		
-		
-</script>
-
-<script>
-	figureF(
-	'CKD Stage Trends in US Adults, 2003-2018.',
-	'Figure 1.1.1',
-	'figure_1_1_1',
-	'column',
-	['All', 'Age < 65', 'Age >= 65','Male','Female','White','African American/Black','Hispanic/Latino'],
-	'CKD Stage in US Adults: ',
-	'Percent',
-	['Group','Stage','2003-2006','2007-10','2011-14','2015-2018'],
-	"<h1>Methods</h1><h2>Study Population</h2><p>The study population consisted of adults aged 20 or more with serum creatinine and urinary albumin and creatinine measurements.</p><h2>Study Variables</h2><p>Age ('RIDAGEYR'), sex ('RIAGENDR') and race-ethnicity ('RIDRETH1', mapped as 3~Non-Hispanic White; 4~Non-Hispanic African American/Black; 1 or 2~Hispanic Latino; 5~Other) were obtained from the following files: DEMO_C, DEMO_D, DEMO_E, DEMO_F, DEMO_G, DEMO_H, DEMO_I and DEMO_J. Urinary creatinine ('URXUCR', meausured by the creatininase enzymatic method) were obtained from the following files: L16_C, ALB_CR_D, ALB_CR_E, ALB_CR_F, ALB_CR_G, ALB_CR_H, ALB_CR_I and ALB_CR_J. The CKD-EPI forumula (<i>Ann Intern Med</i>;150:604-1, 2009) was used to estimate glomerular filtration rates.</p><h2>Analysis</h2><p>R version 3.6.2  (December 12, 2019-<i>Dark and Stormy Night</i>) was used for data analysis. The 'NHANES' package was used to produce national-level cross-sectional prevalance estimates, with 'WTMEC2YR/2', 'SDMVPSU' and 'SDMVSTRA', respectively as survey weight, primary sampling unit and stratum variables.",
-	"<p>Figure 1.1 shows trends in the prevalence of different stages of chronic kidney disease among US adults between 2003-2006 and 2015-2018. For Stage 3, the prevalence was 6.8% in 2003-2006, 5.8% in 2007-106.6% in 2011-14 and 6.1% in 2015-2018. Corresponding values for Stage 4 and 5 were 0.5%, 0.5%, 0.4%, 0.4% and 0.1%, 0.1%, 0.2%, 0.1, respectively. Comparing first and last eras (as shown in the Data section), statistically significant change was observed for Stage 3 in the subgroup with age &ge; 65 Yrs., where the prevalence decreased from 31.4% (95% confidence interval [CI] 29.3,33.5) to 23.7% (95%CI 21.0,26.5) and Stage 1 in the non-Hispanic White subgroup, where the prevalence increased from 2.8% (95%CI 2.3,3.2) to 4.0% (95%CI 3.3,4.7).</p>",
-	800,
-	500
-);
-	
-	
-	
-</script>
-
-<!--<div class = 'figure_1_1_media figure_1_1_media8' style='width:600px;height:400px'>
-	<br>
-	<table id="figure_1_1_dataTable" class="display " style="font-size:10px">
-        <thead>
-            <tr>
-                <th>Group</th>
-                <th>Stage</th>
-                <th>2003-2006</th>
-                <th>2007-10</th>
-                <th>2011-14</th>
-                <th>2015-2018</th>
-            </tr>
-        </thead>
-    </table>
-	<script>
-		$(document).ready(function() {
-    		$('#figure_1_1_dataTable').DataTable({
-				'order': [],
-				dom: 'Bfrtip',
-				buttons: ['csv', 'excel', 'pdf', 'print'],	
-				'columnDefs': [
-        			{'className': 'dt-center', 
-				 	'targets': '_all'}
-      			],
-        		'ajax': 'https://raw.githubusercontent.com/robnfoley/nhanes/master/figure_1_1_json.txt'
-    		});
-		});
-	</script>	
-</div>
-
-<div class = 'figure_1_1_media figure_1_1_media9'>
-	<h1>Methods</h1>
-	<h2>Study Population</h2>
-		<p>The study population consisted of adults aged 20 or more with serum creatinine and urinary albumin and creatinine measurements.</p>
-	<h2>Study Variables</h2>
-		<p>Age ('RIDAGEYR'), sex ('RIAGENDR') and race-ethnicity ('RIDRETH1', mapped as 3~Non-Hispanic White; 4~Non-Hispanic African American/Black; 1 or 2~Hispanic Latino; 5~Other) were obtained from the following files: DEMO_C, DEMO_D, DEMO_E, DEMO_F, DEMO_G, DEMO_H, DEMO_I and DEMO_J. Urinary creatinine ('URXUCR', meausured by the creatininase enzymatic method) were obtained from the following files: L16_C, ALB_CR_D, ALB_CR_E, ALB_CR_F, ALB_CR_G, ALB_CR_H, ALB_CR_I and ALB_CR_J. The CKD-EPI forumula (<i>Ann Intern Med</i>;150:604-1, 2009) was used to estimated glomerular filtration rates.</p>
-	<h2>Analysis</h2>
-		<p>R version 3.6.2  (December 12, 2019-<i>Dark and Stormy Night</i>) was used for data analysis. The 'NHANES' package was used to produce national-level cross-sectional prevalance estimates, with 'WTMEC2YR/2', 'SDMVPSU' and 'SDMVSTRA', respectively as survey weight, primary sampling unit and stratum variables.
-</div>
-
-
-<script>
-	$(document).ready(function(){
-		$('.figure_1_1_media').eq(0).show();
-		$('.figure_1_1_media').not(':eq(0)').hide();
-									 								 
-		$('.figure_1_1_media_choice').on('click', function() {
-			var val = $(this).val();
-			var figure_1_1_media = $('.figure_1_1_media');
-			figure_1_1_media.hide();$('.' + val).show();
-		})
-	});
-</script>
-<div   style = 'position: relative;margin-top:140px'>
-<p>Figure 1.1 shows trends in the prevalence of different stages of chronic kidney disease among US adults between 2003-2006 and 2015-2018. For Stage 3, the prevalence was 6.8% in 2003-2006, 5.8% in 2007-106.6% in 2011-14 and 6.1% in 2015-2018. Corresponding values for Stage 4 and 5 were 0.5%, 0.5%, 0.4%, 0.4% and 0.1%, 0.1%, 0.2%, 0.1, respectively. Comparing first and last eras (as shown in the Data section), statistically significant change was observed for Stage 3 in the subgroup with age &ge; 65 Yrs., where the prevalence decreased from 31.4% (95% confidence interval [CI] 29.3,33.5) to 23.7% (95%CI 21.0,26.5) and Stage 1 in the non-Hispanic White subgroup, where the prevalence increased from 2.8% (95%CI 2.3,3.2) to 4.0% (95%CI 3.3,4.7).</p>
-</div>-->
+{"data": [["All","Stage 1","3.9 (3.3,4.5)","3.9 (3.5,4.4)","4.7 (4.1,5.3)","4.9 (4.4,5.3)"  ],
+  ["All","Stage 2","3.3 (2.8,3.7)","3.1 (2.7,3.5)","2.9 (2.5,3.4)","3.2 (2.7,3.7)"  ],
+  ["All","Stage 3","6.8 (5.9,7.7)","5.8 (5.2,6.4)","6.6 (5.9,7.2)","6.1 (5.2,6.9)"  ],
+  ["All","Stage 4","0.5 (0.3,0.6)","0.5 (0.4,0.6)","0.4 (0.3,0.6)","0.4 (0.3,0.5)"  ],
+  ["All","Stage 5","0.1 (0.0,0.1)","0.1 (0.1,0.2)","0.2 (0.1,0.3)","0.1 (0.1,0.2)"  ],
+  ["Age < 65 Yrs.","Stage 1","4.4 (3.7,5.1)","4.4 (3.8,4.9)","5.3 (4.6,6.1)","5.5 (5.0,6.0)"  ],
+  ["Age < 65 Yrs.","Stage 2","2.1 (1.7,2.4)","1.7 (1.3,2.1)","1.6 (1.3,2.0)","1.5 (1.1,1.9)"  ],
+  ["Age < 65 Yrs.","Stage 3","1.8 (1.4,2.3)","1.6 (1.2,2.0)","2.4 (1.8,2.9)","1.6 (1.2,2.1)"  ],
+  ["Age < 65 Yrs.","Stage 4","0.1 (0.0,0.1)","0.1 (0.0,0.1)","0.1 (0.0,0.2)","0.1 (0.0,0.2)"  ],
+  ["Age < 65 Yrs.","Stage 5","0.0 (0.0,0.1)","0.1 (0.0,0.1)","0.2 (0.1,0.3)","0.1 (0.0,0.1)"  ],
+  ["Age >= 65 Yrs.","Stage 1","1.5 (0.9,2.2)","1.8 (1.1,2.5)","1.7 (1.2,2.2)","2.2 (1.2,3.2)"  ],
+  ["Age >= 65 Yrs.","Stage 2","9.2 (7.9,10.5)","9.9 (8.3,11.5)","9.0 (7.4,10.6)","9.7 (7.8,11.6)"  ],
+  ["Age >= 65 Yrs.","Stage 3","31.4 (29.3,33.5)","26.4 (24.7,28.0)","26.2 (24.2,28.1)","23.7 (21.0,26.5)"  ],
+  ["Age >= 65 Yrs.","Stage 4","2.5 (1.6,3.4)","2.5 (1.9,3.2)","1.9 (1.3,2.5)","1.5 (1.0,1.9)"  ],
+  ["Age >= 65 Yrs.","Stage 5","0.2 (0.0,0.5)","0.4 (0.1,0.6)","0.2 (0.1,0.4)","0.3 (0.1,0.4)"  ],
+  ["Male","Stage 1","3.2 (2.5,3.9)","3.4 (3.0,3.8)","3.9 (3.0,4.8)","4.1 (3.3,4.9)"  ],
+  ["Male","Stage 2","3.5 (2.9,4.1)","3.1 (2.5,3.7)","2.7 (2.2,3.3)","3.4 (2.7,4.1)"  ],
+  ["Male","Stage 3","5.6 (4.8,6.4)","4.7 (4.1,5.4)","5.9 (5.2,6.5)","5.4 (4.6,6.3)"  ],
+  ["Male","Stage 4","0.4 (0.2,0.5)","0.3 (0.2,0.4)","0.3 (0.2,0.5)","0.3 (0.1,0.5)"  ],
+  ["Male","Stage 5","0.1 (0.0,0.1)","0.1 (0.0,0.2)","0.2 (0.0,0.3)","0.2 (0.1,0.2)"  ],
+  ["Female","Stage 1","4.5 (3.8,5.3)","4.4 (3.7,5.1)","5.4 (4.7,6.2)","5.6 (4.7,6.4)"  ],
+  ["Female","Stage 2","3.1 (2.5,3.7)","3.1 (2.5,3.7)","3.1 (2.5,3.8)","3.0 (2.4,3.6)"  ],
+  ["Female","Stage 3","7.9 (6.7,9.1)","6.7 (5.9,7.6)","7.3 (6.2,8.3)","6.7 (5.5,7.9)"  ],
+  ["Female","Stage 4","0.6 (0.3,0.8)","0.7 (0.5,0.8)","0.5 (0.3,0.7)","0.5 (0.3,0.6)"  ],
+  ["Female","Stage 5","0.1 (0.0,0.2)","0.1 (0.0,0.2)","0.2 (0.0,0.3)","0.1 (0.0,0.1)"  ],
+  ["Non-Hispanic White","Stage 1","2.8 (2.3,3.2)","3.0 (2.5,3.6)","3.7 (3.0,4.4)","4.0 (3.3,4.7)"  ],
+  ["Non-Hispanic White","Stage 2","3.2 (2.6,3.8)","3.3 (2.8,3.8)","2.9 (2.2,3.6)","3.4 (2.6,4.1)"  ],
+  ["Non-Hispanic White","Stage 3","8.0 (7.0,9.1)","6.9 (6.1,7.7)","8.0 (7.1,9.0)","7.4 (6.3,8.6)"  ],
+  ["Non-Hispanic White","Stage 4","0.5 (0.3,0.7)","0.5 (0.4,0.7)","0.4 (0.2,0.5)","0.3 (0.2,0.5)"  ],
+  ["Non-Hispanic White","Stage 5","0.1 (0.0,0.1)","0.1 (0.0,0.1)","0.1 (0.0,0.2)","0.1 (0.0,0.1)"  ],
+  ["Non-Hispanic African American/Black","Stage 1","6.0 (4.7,7.3)","6.4 (4.9,8.0)","6.7 (5.7,7.7)","6.0 (4.9,7.2)"  ],
+  ["Non-Hispanic African American/Black","Stage 2","4.0 (2.9,5.0)","2.6 (1.7,3.4)","4.1 (3.5,4.6)","3.5 (2.8,4.3)"  ],
+  ["Non-Hispanic African American/Black","Stage 3","4.9 (3.7,6.0)","5.0 (4.1,5.9)","4.8 (4.0,5.6)","5.4 (4.3,6.4)"  ],
+  ["Non-Hispanic African American/Black","Stage 4","0.5 (0.3,0.8)","0.5 (0.3,0.8)","0.8 (0.4,1.2)","0.7 (0.4,0.9)"  ],
+  ["Non-Hispanic African American/Black","Stage 5","0.2 (0.1,0.4)","0.3 (0.1,0.6)","0.5 (0.2,0.9)","0.3 (0.1,0.5)"  ],
+  ["Hispanic/Latino","Stage 1","7.0 (5.8,8.2)","6.4 (5.6,7.2)","7.3 (5.9,8.7)","6.8 (5.7,7.8)"  ],
+  ["Hispanic/Latino","Stage 2","2.9 (2.2,3.6)","2.6 (2.0,3.2)","2.0 (1.4,2.6)","2.0 (1.3,2.7)"  ],
+  ["Hispanic/Latino","Stage 3","2.3 (1.4,3.1)","2.3 (1.7,2.9)","2.7 (2.1,3.3)","2.6 (1.9,3.2)"  ],
+  ["Hispanic/Latino","Stage 4","0.2 (0.0,0.4)","0.2 (0.1,0.4)","0.4 (0.2,0.7)","0.3 (0.2,0.5)"  ],
+  ["Hispanic/Latino","Stage 5","0.1 (0.0,0.2)","0.1 (0.0,0.2)","0.2 (0.0,0.3)","0.1 (0.0,0.2)"  ]]}
