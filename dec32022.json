@@ -5,7 +5,7 @@
         "data": [0.1,0.2,0.3,0.4,0.5,0.6],
         "unit": "",
         "color":"red",
-        "symbol":"",
+        "symbol":"circle",
         "type": "column",
         "valueDecimals": 1
     }, {
@@ -14,7 +14,7 @@
         "unit": "",
         "color":"gray",
         "type": "column",
-        "symbol":"",
+        "symbol":"circle",
         "valueDecimals": 1
     }, {
         "name": "No CKD, 10-Year Survival",
@@ -37,7 +37,7 @@
         "data": [1,2,3,4,5,6],
         "unit": "",
         "color":"red",
-        "type": "spline",
+        "type": "scatter",
         "symbol":"diamond",
         "valueDecimals": 2
     },{
@@ -45,7 +45,7 @@
         "data": [1,1,1.5,2,2.5,3],
         "unit": "",
         "color":"gray",
-        "type": "spline",
+        "type": "scatter",
         "symbol":"diamond",
         "valueDecimals": 2
     }
