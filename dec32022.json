@@ -1,22 +1,42 @@
 {
     "xData": ["A","B","C","D","E","F"],
     "datasets": [{
-        "name": "Speed",
-        "data": [1,2,3,4,5,6],
-        "unit": "km/h",
+        "name": "No CKD, Proportions",
+        "data": [0.1,0.2,0.3,0.4,0.5,0.6],
+        "unit": "",
+        "type": "column",
+        "valueDecimals": 1
+    }, {
+        "name": "CKD, Proportions",
+        "data": [0.5,0.1,0.15,0.2,0.25,0.3],
+        "unit": "",
+        "type": "column",
+        "valueDecimals": 1
+    }, {
+        "name": "No CKD, 10-Year Survival",
+        "data": [0.1,0.2,0.3,0.4,0.5,0.6],
+        "unit": "",
+        "type": "spline",
+        "valueDecimals": 1
+    },{
+        "name": "CKD, 10-Year Survival",
+        "data": [0.5,0.1,0.15,0.2,0.25,0.3],
+        "unit": "",
         "type": "spline",
         "valueDecimals": 1
     }, {
-        "name": "Elevation",
-        "data": [10,20,30,40,50,60],
-        "unit": "m",
-        "type": "column",
-        "valueDecimals": 0
-    }, {
-        "name": "Heart rate",
-        "data": [100,200,300,400,500,600],
-        "unit": "bpm",
+        "name": "No CKD, Hazards Ratio For Death",
+        "data": [1,2,3,4,5,6],
+        "unit": "",
         "type": "spline",
-        "valueDecimals": 0
-    }]
+        "valueDecimals": 2
+    },{
+        "name": "CKD, Hazards Ratio For Death",
+        "data": [1,1,1.5,2,2.5,3],
+        "unit": "",
+        "type": "spline",
+        "valueDecimals": 1
+    }
+
+]
 }
