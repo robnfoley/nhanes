@@ -2,7 +2,7 @@
     "xData": ["A","B","C","D","E","F"],
     "datasets": [{
         "name": "No CKD, Proportions",
-        "data": [0.1,,0.3,0.4,0.5,0.6],
+        "data": [0.1,0.2,0.3,0.4,0.5,0.6],
         "unit": "",
         "color":"red",
         "symbol":"",
