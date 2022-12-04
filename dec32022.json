@@ -5,6 +5,7 @@
         "data": [0.1,0.2,0.3,0.4,0.5,0.6],
         "unit": "",
         "color":"red",
+        "symbol":"",
         "type": "column",
         "valueDecimals": 1
     }, {
@@ -13,6 +14,7 @@
         "unit": "",
         "color":"gray",
         "type": "column",
+        "symbol":"",
         "valueDecimals": 1
     }, {
         "name": "No CKD, 10-Year Survival",
@@ -20,20 +22,23 @@
         "unit": "",
         "color":"red",
         "type": "spline",
-        "valueDecimals": 1
+        "symbol":"circle",
+        "valueDecimals": 2
     },{
         "name": "CKD, 10-Year Survival",
         "data": [0.5,0.1,0.15,0.2,0.25,0.3],
         "unit": "",
         "color":"gray",
         "type": "spline",
-        "valueDecimals": 1
+        "symbol":"circle",
+        "valueDecimals": 2
     }, {
         "name": "No CKD, Hazards Ratio For Death",
         "data": [1,2,3,4,5,6],
         "unit": "",
         "color":"red",
         "type": "spline",
+        "symbol":"diamond",
         "valueDecimals": 2
     },{
         "name": "CKD, Hazards Ratio For Death",
@@ -41,6 +46,7 @@
         "unit": "",
         "color":"gray",
         "type": "spline",
+        "symbol":"diamond",
         "valueDecimals": 2
     }
 
